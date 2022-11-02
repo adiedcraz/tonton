@@ -10,6 +10,7 @@ void main() {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
+      //enabled: false,
       builder: (context) => App(), // Wrap your app
     ),
   );

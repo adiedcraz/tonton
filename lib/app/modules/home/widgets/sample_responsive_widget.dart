@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:tonton/app/modules/home/controllers/home_controller.dart';
 
-class ResponsiveWidget extends StatelessWidget {
-  const ResponsiveWidget({super.key});
+class SampelResponsiveWidget extends StatelessWidget {
+  const SampelResponsiveWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
