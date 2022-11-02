@@ -17,6 +17,12 @@ class HomeView extends GetView<HomeController> {
             onChanged: controller.onSearch,
           ),
           centerTitle: true,
+          actions: [
+            IconButton(
+              onPressed: controller.filter,
+              icon: Icon(Icons.filter_alt),
+            )
+          ],
         ),
         body: Obx(
           () => controller.movieList.isEmpty
