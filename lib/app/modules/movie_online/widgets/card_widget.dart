@@ -1,7 +1,8 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
-import '../controllers/home_controller.dart';
+import '../../../data/models/movie_model.dart' as model;
 
 class CardWidget extends StatelessWidget {
   const CardWidget({
@@ -10,7 +11,7 @@ class CardWidget extends StatelessWidget {
     required this.onTap,
   }) : super(key: key);
 
-  final Movie movie;
+  final model.Movie movie;
   final void Function() onTap;
 
   @override
@@ -18,10 +19,12 @@ class CardWidget extends StatelessWidget {
     return Card(
       child: ListTile(
         onTap: onTap,
-        title: Text(movie.title ?? ''),
-        subtitle:
-            Text(movie.description ?? '', overflow: TextOverflow.ellipsis),
-        leading: Image.network(movie.imageURL ??
+        title: Text(movie.name ?? ''),
+        //subtitle: Text(movie.summary ?? '', overflow: TextOverflow.ellipsis),
+        subtitle: Html(
+          data: movie.summary,
+        ),
+        leading: Image.network(movie.image?.medium ??
             'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
         //trailing: Text('${movie.rating}'),
         //trailing: Text(movie.rating.toString()),
@@ -36,7 +39,7 @@ class CardWidget extends StatelessWidget {
                 size: 24.0,
               ),
             ),
-            Text((movie.rating ?? 0).toStringAsFixed(1)),
+            Text((movie.rating?.average ?? 0).toStringAsFixed(1)),
           ],
         ),
       ),

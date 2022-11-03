@@ -1,10 +1,12 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+
 import 'package:tonton/app/modules/home/widgets/filter_widget.dart';
 
 class Movie {
@@ -21,6 +23,34 @@ class Movie {
     this.imageURL,
     this.createdAt,
   });
+
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'title': title,
+      'description': description,
+      'rating': rating,
+      'imageURL': imageURL,
+      'createdAt': createdAt?.millisecondsSinceEpoch,
+    };
+  }
+
+  factory Movie.fromMap(Map<String, dynamic> map) {
+    return Movie(
+      title: map['title'] != null ? map['title'] as String : null,
+      description:
+          map['description'] != null ? map['description'] as String : null,
+      rating: map['rating'] != null ? map['rating'] as int : null,
+      imageURL: map['imageURL'] != null ? map['imageURL'] as String : null,
+      createdAt: map['createdAt'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['createdAt'] as int)
+          : null,
+    );
+  }
+
+  String toJson() => json.encode(toMap());
+
+  factory Movie.fromJson(String source) =>
+      Movie.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class HomeController extends GetxController {
