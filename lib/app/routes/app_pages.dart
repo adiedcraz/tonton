@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:tonton/app/middlewares/auth_middleware.dart';
 
 import 'package:tonton/app/modules/create_movie/bindings/create_movie_binding.dart';
 import 'package:tonton/app/modules/create_movie/views/create_movie_view.dart';
@@ -10,6 +11,8 @@ import 'package:tonton/app/modules/movie_online/bindings/movie_online_binding.da
 import 'package:tonton/app/modules/movie_online/views/movie_online_view.dart';
 import 'package:tonton/app/modules/not_found/bindings/not_found_binding.dart';
 import 'package:tonton/app/modules/not_found/views/not_found_view.dart';
+import 'package:tonton/app/modules/register/bindings/register_binding.dart';
+import 'package:tonton/app/modules/register/views/register_view.dart';
 import 'package:tonton/app/modules/sample_navigation/bindings/sample_navigation_binding.dart';
 import 'package:tonton/app/modules/sample_navigation/views/sample_navigation_view.dart';
 
@@ -18,7 +21,7 @@ part 'app_routes.dart';
 class AppPages {
   AppPages._();
 
-  static const INITIAL = Routes.HOME;
+  static const INITIAL = Routes.SAMPLE_NAVIGATION;
   static final UNKNOWN = GetPage(
     name: _Paths.NOT_FOUND,
     page: () => NotFoundView(),
@@ -30,6 +33,7 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
+      //middlewares: [AuthMiddleware()],
     ),
     GetPage(
       name: _Paths.MOVIE_DETAIL,
@@ -55,6 +59,11 @@ class AppPages {
       name: _Paths.MOVIE_ONLINE,
       page: () => MovieOnlineView(),
       binding: MovieOnlineBinding(),
+    ),
+    GetPage(
+      name: _Paths.REGISTER,
+      page: () => RegisterView(),
+      binding: RegisterBinding(),
     ),
   ];
 }

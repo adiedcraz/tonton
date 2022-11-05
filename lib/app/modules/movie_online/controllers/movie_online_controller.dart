@@ -31,9 +31,9 @@ class MovieOnlineController extends GetxController {
 
   Future<void> getMovie() async {
     final value = await _movieProvider.getAllMovie();
+    print(value);
 
     if (value == null) return;
     movies.value = value;
-    print(value);
   }
 }

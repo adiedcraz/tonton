@@ -5,12 +5,17 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:tonton/app/services/auth_services.dart';
 
 import 'app/routes/app_pages.dart';
 
 Future<void> main() async {
   await dotenv.load(fileName: ".env");
   await GetStorage.init();
+  Get.lazyPut<AuthService>(
+    () => AuthService(),
+  );
+
   runApp(
     DevicePreview(
       //enabled: !kReleaseMode,
@@ -26,6 +31,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
+      defaultTransition: Transition.circularReveal,
       useInheritedMediaQuery: true,
       locale: DevicePreview.locale(context),
       builder: DevicePreview.appBuilder,

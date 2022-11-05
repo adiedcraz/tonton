@@ -6,8 +6,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:tonton/app/data/providers/user_provider.dart';
 
 import 'package:tonton/app/modules/home/widgets/filter_widget.dart';
+
+import '../../../routes/app_pages.dart';
+import '../../../services/auth_services.dart';
 
 class Movie {
   String? title;
@@ -79,6 +83,8 @@ class HomeController extends GetxController {
 
   final tarikh = Rx<DateTime?>(null);
   final populariti = Rx<double?>(null);
+  final _authService = Get.find<AuthService>();
+  final _userProvider = Get.find<UserProvider>();
   //bool = true / false;
   //double = 1.0;
   //int = 1;
@@ -124,11 +130,23 @@ class HomeController extends GetxController {
   @override
   void onReady() {
     super.onReady();
+    final _authService = Get.find<AuthService>();
+
+    print(_authService.isAuthenticate);
   }
 
   @override
   void onClose() {}
   void increment() => count.value++;
+
+  getUser() async {
+    try {
+      final user = await _userProvider.getUser();
+      print(user?.toJson());
+    } catch (e) {
+      print(e);
+    }
+  }
 
   void onSearch(String value) {
     keyword.value = value;
@@ -196,5 +214,10 @@ class HomeController extends GetxController {
 
   void onRating(double value) {
     populariti.value = value;
+  }
+
+  void onLogout() {
+    _authService.deleteToken();
+    Get.offAllNamed(Routes.REGISTER);
   }
 }

@@ -20,12 +20,15 @@ class CardWidget extends StatelessWidget {
       child: ListTile(
         onTap: onTap,
         title: Text(movie.name ?? ''),
-        //subtitle: Text(movie.summary ?? '', overflow: TextOverflow.ellipsis),
-        subtitle: Html(
-          data: movie.summary,
+        subtitle: Text(movie.summary ?? '', overflow: TextOverflow.ellipsis),
+        // subtitle: Html(
+        //   data: movie.summary,
+        // ),
+        leading: Hero(
+          tag: movie.image?.original ?? '',
+          child: Image.network(movie.image?.medium ??
+              'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
         ),
-        leading: Image.network(movie.image?.medium ??
-            'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
         //trailing: Text('${movie.rating}'),
         //trailing: Text(movie.rating.toString()),
         trailing: Row(

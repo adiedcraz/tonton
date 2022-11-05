@@ -46,6 +46,14 @@ class HomeView extends GetView<HomeController> {
             },
             child: Icon(Icons.travel_explore),
           ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: FloatingActionButton(
+              heroTag: '1',
+              onPressed: controller.onLogout,
+              child: Icon(Icons.logout),
+            ),
+          ),
         ],
       ),
     );
